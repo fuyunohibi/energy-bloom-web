@@ -39,7 +39,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
               key={item.label}
               className={cn(
                 " flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start",
-                { "bg-bank-gradient": isActive }
+                { "bg-primary": isActive }
               )}
             >
               <div className="relative size-6">

@@ -1,22 +1,17 @@
 export const sidebarLinks = [
   {
-    imgURL: "",
+    imgURL: "/assets/icons/sidebar/home-icon.svg",
     route: "/",
     label: "Home",
   },
   {
-    imgURL: "",
-    route: "/",
-    label: "Profile",
+    imgURL: "/assets/icons/sidebar/smart-meter-icon.svg",
+    route: "/house/my-smart-meter",
+    label: "My Smart Meter",
   },
   {
-    imgURL: "",
-    route: "/",
-    label: "Smart Meter Data",
-  },
-  {
-    imgURL: "",
-    route: "/",
-    label: "Transfer Funds",
+    imgURL: "/assets/icons/sidebar/billing-icon.svg",
+    route: "/house/billing",
+    label: "Billing",
   },
 ];
