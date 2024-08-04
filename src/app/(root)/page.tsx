@@ -1,5 +1,22 @@
 import RightSidebar from "../../components/navigations/right-sidebar";
 import HeaderBox from "../../components/shared/box/header-box";
+import { HoverEffect } from "../../components/ui/card-hover-effect";
+
+export const devices = [
+  {
+    title: "Smart Light",
+    count: 3,
+  },
+  {
+    title: "Smart Plug",
+    count: 2,
+  },
+  {
+    title: "Smart TV",
+    count: 1,
+  },
+];
+
 
 const HomePage = () => {
   const loggedIn = {
@@ -23,15 +40,14 @@ const HomePage = () => {
         <header>
           <HeaderBox
             type="greeting"
-            title="Welcome"
+            title="Welcome Home"
             user={loggedIn?.username || "Guest"}
-            subtext="Let's get started with your smart meter."
+            subtext="Let's take a lovely tour of your smart home."
           />
         </header>
+        <HoverEffect items={devices} />
       </div>
-      <RightSidebar 
-        user={loggedIn}
-      />
+      <RightSidebar user={loggedIn} />
     </section>
   );
 };
