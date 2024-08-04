@@ -1,18 +1,29 @@
-
+import HeaderBox from "../../components/shared/box/header-box";
 
 const HomePage = () => {
+  const loggedIn = { username: "JohnDoe" };
   return (
-    <section>
-      <h1>Home Page</h1>
+    <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
+      <div
+        className="no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 py-7 
+        sm:px-8 
+        lg:py-12 
+        xl:max-h-screen xl:overflow-y-scroll"
+      >
+        <header>
+          <HeaderBox
+            type="greeting"
+            title="Welcome"
+            user={loggedIn?.username || "Guest"}
+            subtext="Let's get started with your smart meter."
+          />
+        </header>
+      </div>
     </section>
   );
 };
 
 export default HomePage;
-
-
-
-
 
 // import prisma from "@/lib/db";
 // import { register } from "@/actions/actions";
@@ -34,7 +45,7 @@ export default HomePage;
 //       </div>
 
 //       <div className="flex flex-col items-center justify-center w-full h-full">
-//         <form action={register} className="flex flex-col items-center justify-center w-full h-full"> 
+//         <form action={register} className="flex flex-col items-center justify-center w-full h-full">
 //           <input type="text" name="name" placeholder="Name" className="w-96 h-12 p-4 m-4 border border-gray-300 rounded-xl dark:border-neutral-800" />
 //           <input type="text" name="houseNum" placeholder="House Number" className="w-96 h-12 p-4 m-4 border border-gray-300 rounded-xl dark:border-neutral-800" />
 //           <input type="email" name="email" placeholder="Email" className="w-96 h-12 p-4 m-4 border border-gray-300 rounded-xl dark:border-neutral-800" />

@@ -1,10 +1,5 @@
-import {
-  ClerkProvider,
-  SignIn,
-  SignedIn,
-  SignedOut,
-} from "@clerk/nextjs";
-import "./globals.css";
+import Sidebar from "../../components/navigations/side-bar";
+import "../globals.css";
 
 import { Inter } from "next/font/google";
 
@@ -16,17 +11,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className}`}>
-          <main className="flex h-screen justify-center items-center">
-            <SignedOut>
-              <SignIn routing="hash" />
-            </SignedOut>
-            <SignedIn>{children}</SignedIn>
+          <main className="flex h-screen w-full">
+            <Sidebar 
+            />
+           {children}
           </main>
         </body>
       </html>
-    </ClerkProvider>
   );
 }
