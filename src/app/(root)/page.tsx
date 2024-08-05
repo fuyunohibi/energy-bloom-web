@@ -1,6 +1,7 @@
-import RightSidebar from "../../components/navigations/right-sidebar";
-import HeaderBox from "../../components/shared/box/header-box";
-import { HoverEffect } from "../../components/ui/card-hover-effect";
+import RightSidebar from "@/src/components/navigations/right-sidebar";
+import HeaderBox from "@/src/components/shared/box/header-box";
+import { HoverEffect } from "@/src/components/shared/cards/card-hover-effect";
+
 
 export const devices = [
   {

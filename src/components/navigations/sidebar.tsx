@@ -18,11 +18,10 @@ const Sidebar = ({ user }: SiderbarProps) => {
       <nav className="flex flex-col gap-4">
         <Link href="/" className="mb-12 cursor-pointer flex items-center gap-2">
           <Image
-            src="/icons/logo.svg"
-            width={34}
-            height={34}
+            src="/assets/icons/logo/energy-bloom-icon.png"
+            width={120}
+            height={120}
             alt="Energy Bloom logo"
-            className="size-[24px] max-xl:size-14"
           />
           <h1 className="2xl:text-[26px] font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden">
             Energy Bloom
