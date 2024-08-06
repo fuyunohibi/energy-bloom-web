@@ -3,7 +3,7 @@ declare type LoginUser = {
   password: string;
 };
 
-declare interface signInProps {
+declare interface SignInProps {
   email: string;
   password: string;
 }
@@ -36,7 +36,7 @@ declare type User = {
   dateOfBirth: string;
 };
 
-declare interface getUserInfoProps {
+declare interface GetUserInfoProps {
   userId: string;
 }
 
