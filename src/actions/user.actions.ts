@@ -2,6 +2,29 @@
 
 import { createClient } from "../utils/supabase/server";
 
+export const getUserInfo = async ({ userId }: GetUserInfoProps) => {
+  try {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", userId); // NOTE: Check again whether this should be "userId" instead of "id"
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data || data.length === 0) {
+      throw new Error("User not found.");
+    }
+
+    return data[0]; 
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+    throw new Error("Failed to fetch user info. Please try again later.");
+  }
+};
 
 export const signIn = async ({ email, password }: SignInProps) => {
   try {
