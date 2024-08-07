@@ -46,14 +46,13 @@ const AuthForm = ({ type }: { type: string }) => {
     try {
       if (type === "sign-up") {
         const userData = {
-          firstName: data.firstName!,
-          lastName: data.lastName!,
+          first_name: data.first_name!,
+          last_name: data.last_name!,
           address1: data.address1!,
           city: data.city!,
-          state: data.state!,
-          postalCode: data.postalCode!,
-          dateOfBirth: data.dateOfBirth!,
-          ssn: data.ssn!,
+          province: data.province!,
+          postal_code: data.postal_code!,
+          date_of_birth: data.date_of_birth!,
           email: data.email,
           password: data.password,
         };
@@ -115,15 +114,15 @@ const AuthForm = ({ type }: { type: string }) => {
                   <div className="flex gap-4">
                     <CustomInput
                       control={form.control}
-                      name="firstName"
+                      name="first_name"
                       label="First Name"
                       placeholder="Enter your first name"
                     />
                     <CustomInput
                       control={form.control}
-                      name="lastName"
+                      name="last_name"
                       label="Last Name"
-                      placeholder="Enter your first name"
+                      placeholder="Enter your last name"
                     />
                   </div>
                   <CustomInput
@@ -138,16 +137,22 @@ const AuthForm = ({ type }: { type: string }) => {
                     label="City"
                     placeholder="Enter your city"
                   />
+                  <CustomInput
+                    control={form.control}
+                    name="province"
+                    label="Province"
+                    placeholder="Enter your province"
+                  />
                   <div className="flex gap-4">
                     <CustomInput
                       control={form.control}
-                      name="postalCode"
+                      name="postal_code"
                       label="Postal Code"
                       placeholder="Example: 11101"
                     />
                     <CustomInput
                       control={form.control}
-                      name="dateOfBirth"
+                      name="date_of_birth"
                       label="Date of Birth"
                       placeholder="YYYY-MM-DD"
                     />

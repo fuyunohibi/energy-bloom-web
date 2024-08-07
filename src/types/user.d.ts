@@ -9,39 +9,35 @@ declare interface SignInProps {
 }
 
 declare type SignUpParams = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   address1: string;
   city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
+  province: string;
+  postal_code: string;
+  date_of_birth: string;
   email: string;
   password: string;
 };
 
 declare type User = {
-  $id: string;
+  id: string;
   email: string;
-  userId: string;
-  dwollaCustomerUrl: string;
-  dwollaCustomerId: string;
-  firstName: string;
-  lastName: string;
-  name: string;
+  first_name: string;
+  last_name: string;
+  name: string; 
   address1: string;
   city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
+  postal_code: string;
+  date_of_birth: string;
 };
 
 declare interface GetUserInfoProps {
-  userId: string;
+  user_id: string;
 }
 
 declare type NewUserParams = {
-  userId: string;
+  user_id: string;
   email: string;
   name: string;
   password: string;
