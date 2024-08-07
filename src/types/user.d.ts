@@ -13,7 +13,6 @@ declare type SignUpParams = {
   last_name: string;
   address1: string;
   city: string;
-  province: string;
   postal_code: string;
   date_of_birth: string;
   email: string;

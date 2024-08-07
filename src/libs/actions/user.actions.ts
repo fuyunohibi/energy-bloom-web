@@ -50,6 +50,8 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
   try {
     const supabase = createClient();
 
+    console.log("Attempting sign-up with data:", userData);
+
     const { data, error } = await supabase.auth.signUp({
       email: userData.email,
       password,
@@ -59,7 +61,6 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
           last_name: userData.last_name,
           address1: userData.address1,
           city: userData.city,
-          province: userData.province,
           postal_code: userData.postal_code,
           date_of_birth: userData.date_of_birth,
         },
@@ -67,8 +68,11 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     });
 
     if (error) {
+      console.error("Supabase sign-up error:", error);
       throw new Error(error.message);
     }
+
+    console.log("Sign-up successful, user data:", data.user);
 
     return data.user;
   } catch (error) {

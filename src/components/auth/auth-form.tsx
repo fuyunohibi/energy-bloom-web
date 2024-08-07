@@ -45,12 +45,13 @@ const AuthForm = ({ type }: { type: string }) => {
 
     try {
       if (type === "sign-up") {
+        console.log("SIGNING UP USER: ", data);
+
         const userData = {
           first_name: data.first_name!,
           last_name: data.last_name!,
           address1: data.address1!,
           city: data.city!,
-          province: data.province!,
           postal_code: data.postal_code!,
           date_of_birth: data.date_of_birth!,
           email: data.email,
@@ -58,11 +59,13 @@ const AuthForm = ({ type }: { type: string }) => {
         };
 
         const newUser = await signUp(userData);
+       console.log("NEW USER: ", newUser);
 
         setUser(newUser);
       }
 
       if (type === "sign-in") {
+        console.log("SIGNING IN USER: ", data);
         const response = await signIn({
           email: data.email,
           password: data.password,
@@ -136,12 +139,6 @@ const AuthForm = ({ type }: { type: string }) => {
                     name="city"
                     label="City"
                     placeholder="Enter your city"
-                  />
-                  <CustomInput
-                    control={form.control}
-                    name="province"
-                    label="Province"
-                    placeholder="Enter your province"
                   />
                   <div className="flex gap-4">
                     <CustomInput
