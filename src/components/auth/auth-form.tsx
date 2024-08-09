@@ -59,9 +59,9 @@ const AuthForm = ({ type }: { type: string }) => {
         };
 
         const newUser = await signUp(userData);
-       console.log("NEW USER: ", newUser);
-
         setUser(newUser);
+
+        if (newUser) router.push("/");
       }
 
       if (type === "sign-in") {
