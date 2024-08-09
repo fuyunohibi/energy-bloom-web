@@ -37,7 +37,7 @@ const HomePage = async () => {
             type="greeting"
             title="Welcome Home"
             user={loggedIn?.first_name || "Guest"}
-            subtext="Let's take a lovely tour of your smart home."
+            subtext={`${loggedIn.address1}, ${loggedIn.city}, ${loggedIn.postal_code}`}
           />
         </header>
         <HoverEffect items={devices} />

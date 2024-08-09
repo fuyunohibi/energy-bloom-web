@@ -21,8 +21,13 @@ module.exports = {
         fill: {
           1: "rgba(255, 255, 255, 0.10)",
         },
-        primary: "#054F31",
-        secondary: "#D3A049",
+        // primary: "#054F31",
+        // secondary: "#D3A049",
+        primary: "#c4f7e3",
+        secondary: "#eff1f2",
+        tertiary: "#f0fcbc",
+        quaternary: "#dcd6ff",
+
         indigo: {
           500: "#6172F3",
           700: "#3538CD",
@@ -44,7 +49,7 @@ module.exports = {
           900: "#851651",
         },
         blue: {
-          25: "#F5FAFF",
+          25: "#F5FAFF", 
           100: "#D1E9FF",
           500: "#2E90FA",
           600: "#1570EF",

@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <main className="flex h-screen w-full">
+        <main className="flex h-screen w-full bg-secondary">
           <Sidebar user={loggedIn} />
           {children}
         </main>

@@ -11,7 +11,7 @@ const HeaderBox = ({ type, title, user, subtext }: HeaderBoxProps) => {
       <h1 className="text-[32px] lg:text-[30px] font-semibold text-gray-900">
         {title}
         {type === "greeting" && (
-          <span className="text-primary">&nbsp;{user}</span>
+          <span className="text-black">,&nbsp;{user}</span>
         )}
       </h1>
       <p className="text-[14px] lg:text-[16px] font-normal text-gray-600">{subtext}</p>

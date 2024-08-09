@@ -31,7 +31,7 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
           >
             <Image
               src={user?.avatar_url}
-              className="rounded-full size-10"
+              className="rounded-full"
               width={100}
               height={100}
               alt="user avatar"

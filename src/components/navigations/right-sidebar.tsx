@@ -81,13 +81,21 @@ const RightSidebar = ({ user }: RightSidebarProps) => {
   };
 
   return (
-    <aside className="no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll">
+    <aside className="no-scrollbar hidden max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll bg-white rounded-[3.25rem] m-5 shadow-lg">
       <section className="flex flex-col pb-8">
         {/* BACKGROUND IMAGE */}
         <div className="h-[160px] w-full bg-primary bg-cover bg-no-repeat" />
         {/* PROFILE */}
         <div className="relative flex px-6 max-xl:justify-center">
-          <div className="flex-center absolute -top-12 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile">
+          <div className="flex-center absolute -top-12 size-24 rounded-full bg-gray-100 border-white p-1.5 shadow-profile">
+            <Image
+              src={user?.avatar_url}
+              className="rounded-full"
+              width={100}
+              height={100}
+              alt="user avatar"
+              objectFit="cover"
+            />
           </div>
           <div className="flex flex-col pt-[4.5rem]">
             <h1 className="text-[24px] font-semibold text-gray-900">
@@ -166,7 +174,7 @@ const RightSidebar = ({ user }: RightSidebarProps) => {
                     </button>
                   </DialogClose>
                   <button type="submit" disabled={loading}>
-                    {loading ? 'Saving...' : 'Save'}
+                    {loading ? "Saving..." : "Save"}
                   </button>
                 </DialogFooter>
               </form>
