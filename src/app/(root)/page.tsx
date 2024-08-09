@@ -1,28 +1,17 @@
 import RightSidebar from "@/src/components/navigations/right-sidebar";
 import HeaderBox from "@/src/components/shared/box/header-box";
 import { HoverEffect } from "@/src/components/shared/cards/card-hover-effect";
+import { getDevices } from "@/src/libs/actions/device.actions";
 import { getLoggedInUser, getUserInfo } from "@/src/libs/actions/user.actions";
-
-
-export const devices = [
-  {
-    title: "Smart Light",
-    count: 3,
-  },
-  {
-    title: "Smart Plug",
-    count: 2,
-  },
-  {
-    title: "Smart TV",
-    count: 1,
-  },
-];
 
 
 const HomePage = async () => {
   const user = await getLoggedInUser();
   const loggedIn = await getUserInfo({ user_id: user.id });
+  const devices = await getDevices({ user_id: user.id });
+
+  console.log("LOGGED IN USER:", loggedIn);
+  console.log("USER'S DEVICES:", devices);
 
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
@@ -42,7 +31,10 @@ const HomePage = async () => {
         </header>
         <HoverEffect items={devices} />
       </div>
-      <RightSidebar user={loggedIn} />
+      <RightSidebar 
+        user={loggedIn}
+        devices={devices}
+       />
     </section>
   );
 };

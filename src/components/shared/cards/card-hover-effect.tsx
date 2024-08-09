@@ -1,32 +1,33 @@
 "use client";
 
+import { use, useState } from "react";
 import { cn } from "@/src/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
 
 export const HoverEffect = ({
   items,
   className,
+  useGrid = true,
 }: {
   items: {
-    title: string;
-    count?: number;
+    device_name: string;
+    device_count: number;
   }[];
   className?: string;
+  useGrid?: boolean;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10",
-        className
-      )}
+      className={cn("", className, {
+        "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 py-10": useGrid,
+      })}
     >
       {items.map((item, idx) => (
         <div
-          key={item?.title}
-          className="relative group  block p-2 h-full w-full"
+          key={item?.device_name}
+          className="relative group  block p-2  w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
@@ -48,9 +49,10 @@ export const HoverEffect = ({
             )}
           </AnimatePresence>
           <Card>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>
-              {item.count} {item.count === 1 ? "Device" : "Devices"}
+            <Carddevice_name>{item.device_name}</Carddevice_name>
+            <CardDescription className="text-black-2 text-[14px] font-medium">
+              {item.device_count}{" "}
+              {item.device_count === 1 ? "Device" : "Devices"}
             </CardDescription>
           </Card>
         </div>
@@ -69,17 +71,17 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden relative z-20 shadow-lg bg-white",
+        "rounded-2xl w-full overflow-hidden relative z-20 shadow-lg bg-white",
         className
       )}
     >
       <div className="relative z-50">
-        <div className="p-4">{children}</div>
+        <div className="px-8 py-6">{children}</div>
       </div>
     </div>
   );
 };
-export const CardTitle = ({
+export const Carddevice_name = ({
   className,
   children,
 }: {
@@ -87,7 +89,7 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("text-black-1 font-bold tracking-wide mt-4", className)}>
+    <h4 className={cn("text-black-1 font-bold tracking-wide", className)}>
       {children}
     </h4>
   );
@@ -102,7 +104,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "mt-8 text-black-2 tracking-wide leading-relaxed text-sm",
+        "mt-3 text-black-2 tracking-wide leading-relaxed text-sm",
         className
       )}
     >

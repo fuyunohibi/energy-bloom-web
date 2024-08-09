@@ -13,9 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }) {
   const user = await getLoggedInUser();
-  console.log("USER:", user);
   const loggedIn = await getUserInfo({ user_id: user.id });
-  console.log("LOGGED IN USER:", loggedIn);
 
   if (!loggedIn) redirect("/sign-in");
 

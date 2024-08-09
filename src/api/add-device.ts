@@ -10,10 +10,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Log the request method and body for debugging
       console.log('Received POST request:', req.body);
 
-      const { user_id, device_name, device_type, device_number, device_unit_usage } = req.body;
+      const { user_id, device_name, device_type, device_count, device_unit_usage } = req.body;
 
       // Validate the request body to ensure all required fields are present
-      if (!user_id || !device_name || !device_type || !device_number || !device_unit_usage) {
+      if (!user_id || !device_name || !device_type || !device_count || !device_unit_usage) {
         return res.status(400).json({ error: 'Missing required fields' });
       }
 
@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         user_id, 
         device_name, 
         device_type, 
-        device_number, 
+        device_count, 
         device_unit_usage 
       });
 

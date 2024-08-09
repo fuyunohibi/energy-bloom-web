@@ -1,20 +1,13 @@
 "use server";
 
-import { createClient } from '@/src/utils/supabase/server'; // Adjust the import path based on your project structure
-
-interface AddDeviceParams {
-  user_id: string;
-  device_name: string;
-  device_type: string;
-  device_number: number;
-  device_unit_usage: number;
-}
+import { createClient } from '@/src/utils/supabase/server'; 
+import { revalidatePath } from 'next/cache';
 
 export const addDevice = async ({
   user_id,
   device_name,
   device_type,
-  device_number,
+  device_count,
   device_unit_usage,
 }: AddDeviceParams) => {
   try {
@@ -24,7 +17,7 @@ export const addDevice = async ({
       user_id,
       device_name,
       device_type,
-      device_number,
+      device_count,
       device_unit_usage,
     });
 
@@ -35,7 +28,7 @@ export const addDevice = async ({
           user_id,
           device_name,
           device_type,
-          device_number,
+          device_count,
           device_unit_usage,
         },
       ]);
@@ -44,9 +37,32 @@ export const addDevice = async ({
       throw new Error(error.message);
     }
 
+    revalidatePath('/');
+
     return data;
   } catch (error) {
     console.error('Error adding device:', error);
     throw new Error('Failed to add device. Please try again later.');
+  }
+};
+
+export const getDevices = async ({ user_id }: GetDevicesParams) => {
+  try {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+      .from("devices")
+      .select("*")
+      .eq("user_id", user_id);
+
+    if (error) {
+      console.error("Error:", error);
+      throw new Error(error.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching devices:", error);
+    throw new Error("Failed to fetch devices. Please try again later.");
   }
 };

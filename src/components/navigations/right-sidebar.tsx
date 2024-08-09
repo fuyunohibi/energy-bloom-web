@@ -1,87 +1,15 @@
-"use client";
-
-import * as React from "react";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "../ui/dialog"; // Adjust this import path if needed
-import { addDevice } from "@/src/libs/actions/device.actions";
+import AddDeviceDialog from "../specific/right-side-bar/add-device-dialog";
+import { HoverEffect } from "../shared/cards/card-hover-effect";
 
 interface RightSidebarProps {
-  user: {
-    id: string;
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  user: User;
+  devices: Device[];
 }
 
-const RightSidebar = ({ user }: RightSidebarProps) => {
-  const [deviceName, setDeviceName] = React.useState('');
-  const [deviceType, setDeviceType] = React.useState('');
-  const [deviceNumber, setDeviceNumber] = React.useState('');
-  const [deviceUnitUsage, setDeviceUnitUsage] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setLoading(true);
-
-    try {
-      // const response = await fetch('/api/add-device', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     user_id: user.id,
-      //     device_name: deviceName,
-      //     device_type: deviceType,
-      //     device_number: Number(deviceNumber),
-      //     device_unit_usage: Number(deviceUnitUsage),
-      //   }),
-      // });
-
-      // if (!response.ok) {
-      //   throw new Error('Failed to add device');
-      // }
-
-      // const data = await response.json();
-      // console.log('Device added:', data);
-      // Optionally reset the form or close the dialog here
-      console.log('Device added via front:', {
-        user_id: user.id,
-        device_name: deviceName,
-        device_type: deviceType,
-        device_number: Number(deviceNumber),
-        device_unit_usage: Number(deviceUnitUsage),
-      });
-
-      const data = await addDevice({
-        user_id: user.id,
-        device_name: deviceName,
-        device_type: deviceType,
-        device_number: Number(deviceNumber),
-        device_unit_usage: Number(deviceUnitUsage),
-      });
-
-      console.log('Device success:', data);
-    } catch (error) {
-      console.error('Error adding device:', error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const RightSidebar = ({ user, devices }: RightSidebarProps) => {
   return (
-    <aside className="no-scrollbar hidden max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll bg-white rounded-[3.25rem] m-5 shadow-lg">
+    <aside className="no-scrollbar hidden max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll bg-white rounded-[3.25rem] m-4 shadow-lg">
       <section className="flex flex-col pb-8">
         {/* BACKGROUND IMAGE */}
         <div className="h-[160px] w-full bg-primary bg-cover bg-no-repeat" />
@@ -110,77 +38,15 @@ const RightSidebar = ({ user }: RightSidebarProps) => {
 
       <section className="flex flex-col justify-between gap-8 px-6 py-8">
         <div className="flex w-full justify-between">
-          <h2 className="text-[18px] font-semibold text-gray-900">
-            My Furniture
+          <h2 className="text-[18px] font-semibold text-gray-900 mt-1">
+            My Devices
           </h2>
-          <Dialog>
-            <DialogTrigger asChild>
-              <button className="flex gap-2">
-                <Image
-                  src="/assets/icons/shared/plus-icon.svg"
-                  width={20}
-                  height={20}
-                  alt="plus icon"
-                />
-                <h2 className="text-[14px] font-semibold text-gray-600 mt-[0.15rem]">
-                  Add Furniture
-                </h2>
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Add Device</DialogTitle>
-                <DialogDescription>
-                  Add details about the new device.
-                </DialogDescription>
-              </DialogHeader>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Device Name"
-                  value={deviceName}
-                  onChange={(e) => setDeviceName(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Device Type"
-                  value={deviceType}
-                  onChange={(e) => setDeviceType(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-                <input
-                  type="number"
-                  placeholder="Device Number"
-                  value={deviceNumber}
-                  onChange={(e) => setDeviceNumber(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-                <input
-                  type="number"
-                  placeholder="Device Unit Usage"
-                  value={deviceUnitUsage}
-                  onChange={(e) => setDeviceUnitUsage(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <button type="button" className="mr-4">
-                      Cancel
-                    </button>
-                  </DialogClose>
-                  <button type="submit" disabled={loading}>
-                    {loading ? "Saving..." : "Save"}
-                  </button>
-                </DialogFooter>
-              </form>
-            </DialogContent>
-          </Dialog>
+          <AddDeviceDialog userId={user.id} />
         </div>
+        <HoverEffect
+          items={devices}
+          useGrid={false}
+        />
       </section>
     </aside>
   );
