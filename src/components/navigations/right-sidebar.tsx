@@ -19,7 +19,7 @@ const RightSidebar = ({ user }: RightSidebarProps) => {
 
           <div className="flex flex-col pt-[4.5rem]">
             <h1 className="text-[24px] font-semibold text-gray-900">
-              {user.firstName} {user.lastName}
+              {user.first_name} {user.last_name}
             </h1>
             <p className="text-[16px] font-normal text-gray-600">
               {user.email}
