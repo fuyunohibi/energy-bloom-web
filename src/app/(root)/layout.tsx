@@ -1,7 +1,9 @@
+import { getLoggedInUser, getUserInfo } from "@/src/libs/actions/user.actions";
 import Sidebar from "../../components/navigations/sidebar";
 import "../globals.css";
 
 import { Inter } from "next/font/google";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Energy Bloom | A minimal smart meter platform",
@@ -9,15 +11,22 @@ export const metadata = {
 };
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const user = await getLoggedInUser();
+  console.log("USER:", user);
+  const loggedIn = await getUserInfo({ user_id: user.id });
+  console.log("LOGGED IN USER:", loggedIn);
+
+  if (!loggedIn) redirect("/sign-in");
+
   return (
-      <html lang="en">
-        <body className={`${inter.className}`}>
-          <main className="flex h-screen w-full">
-            <Sidebar />
-           {children}
-          </main>
-        </body>
-      </html>
+    <html lang="en">
+      <body className={`${inter.className}`}>
+        <main className="flex h-screen w-full">
+          <Sidebar user={loggedIn} />
+          {children}
+        </main>
+      </body>
+    </html>
   );
 }

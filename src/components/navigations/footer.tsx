@@ -29,9 +29,14 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
                 : "flex size-10 items-center justify-center rounded-full bg-gray-200 max-xl:hidden"
             }
           >
-            <p className="text-xl font-bold text-gray-700">
-              {user?.first_name[0]}
-            </p>
+            <Image
+              src={user?.avatar_url}
+              className="rounded-full size-10"
+              width={100}
+              height={100}
+              alt="user avatar"
+              objectFit="cover"
+            />
           </div>
 
           <div

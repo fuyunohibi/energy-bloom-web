@@ -2,6 +2,26 @@
 
 import { createClient } from "@/src/utils/supabase/server";
 
+export const getLoggedInUser = async () => {
+  try {
+    const supabase = createClient();
+
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return user;
+  } catch (error) {
+    console.error("Error fetching logged-in user:", error);
+    throw new Error("Failed to get logged-in user.");
+  }
+};
+
 export const getUserInfo = async ({ user_id }: GetUserInfoProps) => {
   try {
     const supabase = createClient();
@@ -9,7 +29,7 @@ export const getUserInfo = async ({ user_id }: GetUserInfoProps) => {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("id", user_id); // Ensure you are using "id" if that's the primary key
+      .eq("id", user_id)
 
     if (error) {
       throw new Error(error.message);
@@ -130,25 +150,6 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
   }
 };
 
-export const getLoggedInUser = async () => {
-  try {
-    const supabase = createClient();
-
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    return user;
-  } catch (error) {
-    console.error("Error fetching logged-in user:", error);
-    throw new Error("Failed to get logged-in user.");
-  }
-};
 
 export const logoutAccount = async () => {
   try {
