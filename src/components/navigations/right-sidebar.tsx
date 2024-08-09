@@ -97,6 +97,16 @@ const RightSidebar = ({ user }: RightSidebarProps) => {
               {user.email}
             </p>
           </div>
+          <div className="pt-3 ml-auto">
+            <Link href="/sign-in" className="flex gap-2">
+              <Image
+                src="/assets/icons/shared/logout-icon.svg"
+                width={30}
+                height={30}
+                alt="logout icon"
+              />
+            </Link>
+          </div>
         </div>
       </section>
 
