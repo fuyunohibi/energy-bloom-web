@@ -52,19 +52,10 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 
     console.log("Attempting sign-up with data:", userData);
 
+    // Sign up the user with just email and password (SUPABASE AUTH)
     const { data, error } = await supabase.auth.signUp({
       email: userData.email,
       password,
-      options: {
-        data: {
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-          address1: userData.address1,
-          city: userData.city,
-          postal_code: userData.postal_code,
-          date_of_birth: userData.date_of_birth,
-        },
-      },
     });
 
     if (error) {
@@ -73,6 +64,64 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     }
 
     console.log("Sign-up successful, user data:", data.user);
+
+    if (!data.user) {
+      throw new Error("Failed to retrieve user data after sign-up.");
+    }
+
+    // Check if the user already exists in the users table
+    const { data: existingUser, error: selectError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("id", data.user.id)
+      .single();
+
+    if (selectError && selectError.code !== "PGRST116") {
+      console.error("Error checking if user exists:", selectError);
+      throw new Error(
+        "Failed to check if user exists. Please try again later."
+      );
+    }
+
+    if (existingUser) {
+      // User already exists, update the record
+      const { error: updateError } = await supabase
+        .from("users")
+        .update({
+          email: userData.email,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          address1: userData.address1,
+          city: userData.city,
+          postal_code: userData.postal_code,
+          date_of_birth: userData.date_of_birth,
+        })
+        .eq("id", data.user.id);
+
+      if (updateError) {
+        console.error("Error updating user data:", updateError);
+        throw new Error("Failed to update user data. Please try again later.");
+      }
+    } else {
+      // User does not exist, insert a new record
+      const { error: insertError } = await supabase.from("users").insert([
+        {
+          id: data.user.id,
+          email: userData.email,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          address1: userData.address1,
+          city: userData.city,
+          postal_code: userData.postal_code,
+          date_of_birth: userData.date_of_birth,
+        },
+      ]);
+
+      if (insertError) {
+        console.error("Error inserting user data:", insertError);
+        throw new Error("Failed to insert user data. Please try again later.");
+      }
+    }
 
     return data.user;
   } catch (error) {
