@@ -30,6 +30,7 @@ const HomePage = () => {
     avatar: "https://randomuser.me/api/portraits",
     houseNumber: "123/456",
   };
+
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
       <div
