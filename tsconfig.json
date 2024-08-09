@@ -2,9 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "lib": [
       "dom",
@@ -26,16 +24,14 @@
       {
         "name": "next"
       }
-    ],
-    "strictNullChecks": true
+    ]
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "src/app/(root)/page.jtsx"
-  ],
+    "**/*.tsx"
+, "src/app/(root)/page.jtsx"  ],
   "exclude": [
     "node_modules"
   ]
