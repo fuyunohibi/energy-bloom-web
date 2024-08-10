@@ -7,9 +7,14 @@ import { getLoggedInUser, getUserInfo } from "@/src/libs/actions/user.actions";
 
 const HomePage = async () => {
   const user = await getLoggedInUser();
-  const loggedIn = await getUserInfo({ user_id: user.id });
-  const devices = await getDevices({ user_id: user.id });
+  let loggedIn = null;
+  let devices: Device[] = [];
 
+  if (user) {
+    loggedIn = await getUserInfo({ user_id: user.id });
+    devices = await getDevices({ user_id: user.id });
+  }
+  
   console.log("LOGGED IN USER:", loggedIn);
   console.log("USER'S DEVICES:", devices);
 

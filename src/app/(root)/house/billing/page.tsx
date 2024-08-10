@@ -1,7 +1,7 @@
 import RightSidebar from "@/src/components/navigations/right-sidebar";
 import HeaderBoxBilling from "@/src/components/shared/box/header-box-billing";
 import { HoverEffectBilling } from "@/src/components/shared/cards/card-billing";
-import { getBilling } from "@/src/libs/actions/billing.actions";
+import { getBillings } from "@/src/libs/actions/billing.actions";
 import { getLoggedInUser, getUserInfo } from "@/src/libs/actions/user.actions";
 
 const getCurrentMonthYear = () => {
@@ -14,14 +14,14 @@ const getCurrentMonthYear = () => {
 export const BillingPage = async () => {
   const user = await getLoggedInUser();
   let loggedIn = null;
-  let billing: Billing[] = [];
+  let billings: Billing[] = [];
 
   if (user) {
     loggedIn = await getUserInfo({ user_id: user.id });
-    billing = await getBilling({ user_id: user.id });
+    billings = await getBillings({ user_id: user.id });
   }
 
-  let billings = billing.map((bill) => {
+  let formatedBillings = billings.map((bill) => {
     return {
       month_year: `${bill.month} ${bill.year}`,
       price: bill.price,
@@ -31,7 +31,7 @@ export const BillingPage = async () => {
   });
 
   console.log("LOGGED IN USER:", loggedIn);
-  console.log("USER'S BILLING:", billing);
+  console.log("USER'S FORMATED BILLING:", formatedBillings);
 
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
@@ -47,7 +47,7 @@ export const BillingPage = async () => {
             subtext={getCurrentMonthYear()}
           />
         </header>
-        <HoverEffectBilling items={billings} />
+        <HoverEffectBilling items={formatedBillings} />
       </div>
     </section>
   );
