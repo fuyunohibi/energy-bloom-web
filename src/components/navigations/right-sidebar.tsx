@@ -1,6 +1,6 @@
 import Image from "next/image";
-import AddDeviceDialog from "../specific/right-side-bar/add-device-dialog";
-import { HoverEffect } from "../shared/cards/card-hover-effect";
+import { HoverEffectEdit } from "../shared/cards/card-edit";
+import AddDeviceDialog from "../shared/dialogs/add-device-dialog";
 
 interface RightSidebarProps {
   user: User;
@@ -43,7 +43,7 @@ const RightSidebar = ({ user, devices }: RightSidebarProps) => {
           </h2>
           <AddDeviceDialog userId={user.id} />
         </div>
-        <HoverEffect
+        <HoverEffectEdit
           items={devices}
           useGrid={false}
         />

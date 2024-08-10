@@ -36,10 +36,7 @@ const HomePage = async () => {
         </header>
         <HoverEffect items={devices} />
       </div>
-      <RightSidebar 
-        user={loggedIn}
-        devices={devices}
-       />
+      <RightSidebar user={loggedIn} devices={devices} />
     </section>
   );
 };
