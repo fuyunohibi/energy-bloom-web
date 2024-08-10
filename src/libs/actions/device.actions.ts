@@ -46,6 +46,71 @@ export const addDevice = async ({
   }
 };
 
+export const updateDevice = async ({
+  id,
+  device_name,
+  device_type,
+  device_count,
+  device_unit_usage,
+}: UpdateDeviceParams) => {
+  try {
+    const supabase = createClient();
+
+    console.log('Updating device this is from actions:', {
+      id,
+      device_name,
+      device_type,
+      device_count,
+      device_unit_usage,
+    });
+
+    const { data, error } = await supabase
+      .from('devices')
+      .update({
+        device_name,
+        device_type,
+        device_count,
+        device_unit_usage,
+      })
+      .eq('id', id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    revalidatePath('/');
+
+    return data;
+  } catch (error) {
+    console.error('Error updating device:', error);
+    throw new Error('Failed to update device. Please try again later.');
+  }
+}
+  
+export const deleteDevice = async ({ id }: DeleteDeviceParams) => {
+  try {
+    const supabase = createClient();
+
+    console.log('Deleting device this is from actions:', id);
+
+    const { data, error } = await supabase
+      .from('devices')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    revalidatePath('/');
+
+    return data;
+  } catch (error) {
+    console.error('Error deleting device:', error);
+    throw new Error('Failed to delete device. Please try again later.');
+  }
+};
+
 export const getDevices = async ({ user_id }: GetDevicesParams) => {
   try {
     const supabase = createClient();
