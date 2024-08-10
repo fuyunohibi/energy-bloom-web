@@ -25,7 +25,7 @@ const RightSidebar = ({ user, devices }: RightSidebarProps) => {
               objectFit="cover"
             />
           </div>
-          <div className="flex flex-col pt-[4.5rem]">
+          <div className="flex flex-col pt-[4.5rem]">z
             <h1 className="text-[24px] font-semibold text-gray-900">
               {user.first_name} {user.last_name}
             </h1>

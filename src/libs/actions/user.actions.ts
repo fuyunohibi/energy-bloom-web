@@ -12,17 +12,15 @@ export const getLoggedInUser = async () => {
     } = await supabase.auth.getUser();
 
     if (error) {
-      console.error("Error fetching logged-in user:", error.message);
-      return null; // Return null if there's an error
+      throw new Error(error.message);
     }
 
     return user;
   } catch (error) {
     console.error("Error fetching logged-in user:", error);
-    return null; // Return null in case of a general error
+    throw new Error("Failed to get logged-in user.");
   }
 };
-
 
 export const getUserInfo = async ({ user_id }: GetUserInfoProps) => {
   try {
