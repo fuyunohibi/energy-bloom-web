@@ -17,18 +17,6 @@ declare interface GetMonthlyUsageParams {
     user_id: string;
 }
 
-declare interface AddElectricityUsageParams {
-    user_id: string;
-    usage: number;
-    price: number;
-}
-
-declare interface UpdateElectricityUsageParams {
-    user_id: string;
-    usage: number;
-    price: number;
-}
-
 declare interface AddorUpdateElectricityUsageParams {
     user_id: string;
     usage: number;

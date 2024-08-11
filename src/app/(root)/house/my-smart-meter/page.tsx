@@ -2,7 +2,7 @@ import ColorIndicator from "@/src/components/shared/box/color-indicator";
 import HeaderBox from "@/src/components/shared/box/header-box";
 import DoughnutChart from "@/src/components/shared/charts/doughnut-chart";
 import { MAX_MONTHY_USAGE } from "@/src/constants";
-import { calculateUsage, getMonthlyUsage, addOrUpdateMonthlyUsage, addElectricityUsage } from "@/src/libs/actions/electricity-usage.actions";
+import { calculateUsage, getMonthlyUsage, addOrUpdateMonthlyUsage } from "@/src/libs/actions/electricity-usage.actions";
 import { getLoggedInUser } from "@/src/libs/actions/user.actions";
 import { cn } from "@/src/utils/cn";
 import dayjs from "dayjs";
@@ -22,6 +22,8 @@ const MySmartMeterPage = async () => {
     totalUsage = usage;
     totalPrice = price;
     console.log("------------Total usage:", totalUsage);
+    const usage_id = await addOrUpdateMonthlyUsage({ user_id: user.id, usage: totalUsage, price: totalPrice });
+    console.log("------------Usage ID:", usage_id);
   }
 
   return (
