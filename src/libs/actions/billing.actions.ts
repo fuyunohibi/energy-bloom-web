@@ -17,14 +17,17 @@ export const addBilling = async ({
     const createdAt = dayjs().toISOString();
 
     const price = await getMonthlyUsage({ user_id });
-    const tax = price * TAX;
-    const total = price + TAX;
+
+    const totalPrice = price.totalPrice || 0;
+
+    const tax = totalPrice * TAX;
+    const total = totalPrice + tax;
 
     console.log("Adding billing this is from actions:", {
       user_id,
       month,
       year,
-      price,
+      totalPrice,
       tax,
       total,
       created_at: createdAt,
@@ -35,10 +38,10 @@ export const addBilling = async ({
         user_id,
         month,
         year,
-        price,
+        price: totalPrice,
         tax,
         total,
-        created_at: createdAt, 
+        created_at: createdAt,
       },
     ]);
 
@@ -46,7 +49,7 @@ export const addBilling = async ({
       throw new Error(error.message);
     }
 
-    revalidatePath("/");
+    revalidatePath("/house/billing");
 
     return data;
   } catch (error) {
@@ -74,7 +77,7 @@ export const getBillings = async ({
     console.log("BILLING DATA:", data);
 
     const isFirstDayOfMonth = dayjs().date() === 1;
-    if (isFirstDayOfMonth) {
+    if (true) {
       await addBilling({
         user_id,
         month: dayjs().month() + 1,
