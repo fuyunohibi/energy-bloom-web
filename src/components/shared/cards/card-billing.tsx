@@ -56,7 +56,7 @@ export const HoverEffectBilling = ({
             <CardDescription className="text-black-2 text-[14px] font-medium flex">
                 <div className="flex flex-col">
                     <p> Price: {item.price} .- </p>
-                    <p> Tax: {item.tax} % </p>
+                    <p> Tax: {item.tax} .- </p>
                 </div>
                 <div className="flex ml-auto">
                     <p> Total: {item.total} .- </p>

@@ -21,8 +21,10 @@ export const BillingPage = async () => {
   }
 
   let formatedBillings = billings.map((bill) => {
+    const monthFormatted = new Date(bill.created_at).toLocaleString('en-US', { month: 'long' });
+
     return {
-      month_year: `${bill.month} ${bill.year}`,
+      month_year: `${monthFormatted} ${bill.year}`,
       price: bill.price,
       tax: bill.tax,
       total: bill.total,

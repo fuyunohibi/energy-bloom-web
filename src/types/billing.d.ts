@@ -1,8 +1,8 @@
 declare type Billing = {
     id: string;
     user_id: string;
-    month: string;
-    year: string;
+    month: number;
+    year: number;
     price: number;
     tax: number;
     total: number;
@@ -11,11 +11,8 @@ declare type Billing = {
 
 declare interface AddBillingParams {
     user_id: string;
-    month: string;
-    year: string;
-    price: number;
-    tax: number;
-    total: number;
+    month: number;
+    year: number;
 }
 
 declare interface GetBillingParams {
