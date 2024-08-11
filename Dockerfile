@@ -1,23 +1,25 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18-alpine
+FROM node:alpine AS builder
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock) into the working directory
-COPY package*.json ./
+ENV NEXT_TELEMETRY_DISABLED 1
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the Next.js app
+RUN yarn install --frozen-lockfile
 RUN yarn build
 
-# Expose the port the app runs on
-EXPOSE 3000
+FROM node:alpine AS runner
 
-# Define the command to run the app
-CMD ["yarn", "run", "dev"]
+WORKDIR /app
+
+ENV NODE_ENV production
+
+COPY --from=builder /app ./
+
+RUN addgroup -S nodejs -g 1001
+RUN adduser -S nextjs -u 1001 -G nodejs
+
+USER nextjs
+
+CMD ["yarn", "start"]
