@@ -26,6 +26,7 @@ export const BillingPage = async () => {
     return {
       month_year: `${monthFormatted} ${bill.year}`,
       price: bill.price,
+      usage: bill.usage,
       tax: bill.tax,
       total: bill.total,
     };

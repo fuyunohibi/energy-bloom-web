@@ -11,6 +11,7 @@ export const HoverEffectBilling = ({
 }: {
   items: {
     month_year: string;
+    usage: number;
     price: number;
     tax: number;
     total: number;
@@ -53,8 +54,10 @@ export const HoverEffectBilling = ({
           </AnimatePresence>
           <Card>
             <Cardmonth_year>{item.month_year}</Cardmonth_year>
+            <div className="border-t border-gray-300 my-4"></div>
             <CardDescription className="text-black-2 text-[14px] font-medium flex">
                 <div className="flex flex-col">
+                    <p> Total Electricity Usage: {item.usage} kWh </p>
                     <p> Price: {item.price} .- </p>
                     <p> Tax: {item.tax} .- </p>
                 </div>

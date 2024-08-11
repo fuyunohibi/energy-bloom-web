@@ -3,6 +3,7 @@ declare type Billing = {
     user_id: string;
     month: number;
     year: number;
+    usage: number;
     price: number;
     tax: number;
     total: number;
