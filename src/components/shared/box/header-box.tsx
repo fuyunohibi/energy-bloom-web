@@ -27,7 +27,7 @@ const HeaderBox = ({ type, title, user, subtext, iconUrl }: HeaderBoxProps) => {
               height={2}
               className="size-5"
             />
-          </div> 
+          </div>
         )}
         {subtext && (
           <p className="text-[14px] lg:text-[16px] font-normal text-gray-600">
