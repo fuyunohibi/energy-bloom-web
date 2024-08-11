@@ -16,11 +16,13 @@ export const addBilling = async ({
 
     const createdAt = dayjs().toISOString();
 
-    const price = await getMonthlyUsage({ user_id });
+    const {usage, price} = await getMonthlyUsage({ user_id });
+    const numericPrice = Number(price);
+    const totalPrice = Number(numericPrice.toFixed(2));
 
-    const totalPrice = price.totalPrice || 0;
+    console.log("price:", totalPrice);
 
-    const tax = totalPrice * TAX;
+    const tax = Number((totalPrice * TAX).toFixed(2));
     const total = totalPrice + tax;
 
     console.log("Adding billing this is from actions:", {
@@ -58,31 +60,39 @@ export const addBilling = async ({
   }
 };
 
-export const getBillings = async ({
-  user_id,
-}: GetBillingParams) => {
+export const getBillings = async ({ user_id }: GetBillingParams) => {
   try {
     const supabase = createClient();
+    const currentMonth = dayjs().month() + 1;
+    const currentYear = dayjs().year();
 
     const { data, error } = await supabase
-        .from("billings")
-        .select("*")
-        .eq("user_id", user_id);
+      .from("billings")
+      .select("*")
+      .eq("user_id", user_id);
 
     if (error) {
-        console.error("Error:", error);
-        throw new Error(error.message);
+      console.error("Error:", error);
+      throw new Error(error.message);
     }
 
     console.log("BILLING DATA:", data);
 
-    const isFirstDayOfMonth = dayjs().date() === 1;
-    if (true) {
+    const isFirstDayOfMonth = new Date().getDate() === 1;
+    const hasCurrentMonthBilling = data.some(
+      (billing) => billing.month === currentMonth && billing.year === currentYear
+    );
+    console.log("hasCurrentMonthBilling:", hasCurrentMonthBilling);
+    if (!hasCurrentMonthBilling || (!hasCurrentMonthBilling && isFirstDayOfMonth)) {
+      console.log("No billing data for this month. Adding new billing...");
+
       await addBilling({
         user_id,
-        month: dayjs().month() + 1,
-        year: dayjs().year(),
+        month: currentMonth,
+        year: currentYear,
       });
+    } else {
+      console.log("Billing data already exists for this month.");
     }
 
     return data;

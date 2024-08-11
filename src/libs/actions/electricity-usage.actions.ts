@@ -30,12 +30,12 @@ export const getMonthlyUsage = async ({ user_id }: GetMonthlyUsageParams) => {
         if (!data || data.length === 0) {
             console.log("No usage data found for the current month.");
             return {
-                totalUsage: 0,
-                totalPrice: 0
+                usage: 0,
+                price: 0
             };
         }
 
-        return data[0].price;
+        return {usage: data[0].usage, price: data[0].price};
 
     } catch (error) {
         console.error("Error fetching usage data:", error);
@@ -98,7 +98,7 @@ export const addElectricityUsage = async ({
   }: UpdateElectricityUsageParams) => {
     try {
         const supabase = createClient();
-        const updatedAt = dayjs().toISOString(); 
+        const updatedAt = dayjs().toISOString();
 
         const currentMonth = dayjs().month() + 1;
         const currentYear = dayjs().year();
@@ -178,7 +178,6 @@ export const calculateUsage = async ({ user_id }: GetTodayUsageParams): Promise<
             price,
         });
 
-        //Hashing the usage data with bcrypt
         const saltRounds = 10;
         const usageString = usage.toString();
         const hashedUsage = await bcrypt.hash(usageString, saltRounds);
@@ -188,10 +187,25 @@ export const calculateUsage = async ({ user_id }: GetTodayUsageParams): Promise<
         // hash value doesnt match
         // console.log("Usage Data Verification:", await bcrypt.compare("wrong hash value", hashedUsage));
 
-        const isFirstDayOfMonth = now.isSame(dayjs().startOf("month"), "day");
+        const isFirstDayOfMonth = new Date().getDate() === 1;
         console.log("Is first day of month:", isFirstDayOfMonth);
+        
+        const { data: existingUsage, error: checkError } = await supabase
+            .from("usages")
+            .select("*")
+            .eq("user_id", user_id)
+            .eq("month", now.month() + 1)
+            .eq("year", now.year());
 
-        if (isFirstDayOfMonth) {
+        if (checkError) {
+            console.error("Error checking existing usage:", checkError);
+            throw new Error(checkError.message);
+        }
+
+        const hasCurrentMonthUsage = existingUsage.length > 0;
+        console.log("Has current month usage:", hasCurrentMonthUsage);
+
+        if (!hasCurrentMonthUsage || (!hasCurrentMonthUsage && isFirstDayOfMonth)) {
             try {
                 await addElectricityUsage({ user_id, usage, price });
             } catch (error) {
