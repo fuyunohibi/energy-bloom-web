@@ -32,6 +32,7 @@ const HomePage = async () => {
             title="Welcome Home"
             user={loggedIn?.first_name || "Guest"}
             subtext={`${loggedIn.address1}, ${loggedIn.city}, ${loggedIn.postal_code}`}
+            iconUrl="/assets/icons/shared/pin-icon.svg"
           />
         </header>
         <HoverEffect items={devices} />

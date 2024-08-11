@@ -1,5 +1,4 @@
-import RightSidebar from "@/src/components/navigations/right-sidebar";
-import HeaderBoxBilling from "@/src/components/shared/box/header-box-billing";
+import HeaderBox from "@/src/components/shared/box/header-box";
 import { HoverEffectBilling } from "@/src/components/shared/cards/card-billing";
 import { getBillings } from "@/src/libs/actions/billing.actions";
 import { getLoggedInUser, getUserInfo } from "@/src/libs/actions/user.actions";
@@ -42,9 +41,10 @@ export const BillingPage = async () => {
         xl:max-h-screen xl:overflow-y-scroll"
       >
         <header>
-          <HeaderBoxBilling
+          <HeaderBox
             title="Your billing information"
             subtext={getCurrentMonthYear()}
+            iconUrl="/assets/icons/shared/calendar-icon.svg"
           />
         </header>
         <HoverEffectBilling items={formatedBillings} />

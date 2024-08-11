@@ -4,10 +4,11 @@ interface HeaderBoxProps {
   type?: "greeting" | "title";
   title: string;
   user?: string;
-  subtext: string;
+  subtext?: string;
+  iconUrl?: string;
 }
 
-const HeaderBox = ({ type, title, user, subtext }: HeaderBoxProps) => {
+const HeaderBox = ({ type, title, user, subtext, iconUrl }: HeaderBoxProps) => {
   return (
     <div className="flex flex-col gap-1">
       <h1 className="text-[32px] lg:text-[30px] font-semibold text-gray-900">
@@ -17,18 +18,22 @@ const HeaderBox = ({ type, title, user, subtext }: HeaderBoxProps) => {
         )}
       </h1>
       <div className="flex flex-row gap-2 items-center">
-        <div className="bg-primary rounded-full w-8 h-8 flex items-center justify-center">
-          <Image
-            src="/assets/icons/shared/pin-icon.svg"
-            alt="pin icon"
-            width={50}
-            height={2}
-            className="size-5"
-          />
-        </div>
-        <p className="text-[14px] lg:text-[16px] font-normal text-gray-600">
-          {subtext}
-        </p>
+        {iconUrl && (
+          <div className="bg-primary rounded-full w-8 h-8 flex items-center justify-center">
+            <Image
+              src={iconUrl}
+              alt={`${iconUrl}`}
+              width={50}
+              height={2}
+              className="size-5"
+            />
+          </div> 
+        )}
+        {subtext && (
+          <p className="text-[14px] lg:text-[16px] font-normal text-gray-600">
+            {subtext}
+          </p>
+        )}
       </div>
     </div>
   );
