@@ -16,6 +16,6 @@ export const sidebarLinks = [
   },
 ];
 
-export const UNIT_PRICE = 4;
+export const UNIT_PRICE = 2.9;
 export const TAX = 0.07;
 export const MAX_MONTHY_USAGE = 1000;
