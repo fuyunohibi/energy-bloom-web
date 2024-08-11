@@ -1,8 +1,8 @@
 import ColorIndicator from "@/src/components/shared/box/color-indicator";
 import HeaderBox from "@/src/components/shared/box/header-box";
 import DoughnutChart from "@/src/components/shared/charts/doughnut-chart";
-import { MAX_DAILY_USAGE } from "@/src/constants";
-import { getTodayUsage } from "@/src/libs/actions/device.actions";
+import { MAX_MONTHY_USAGE } from "@/src/constants";
+import { calculateUsage, getMonthlyUsage, addOrUpdateMonthlyUsage } from "@/src/libs/actions/electricity-usage.actions";
 import { getLoggedInUser } from "@/src/libs/actions/user.actions";
 import { cn } from "@/src/utils/cn";
 import dayjs from "dayjs";
@@ -12,15 +12,19 @@ const MySmartMeterPage = async () => {
 
   const user = await getLoggedInUser();
   let totalUsage = 0;
-  let totalPriceToday = 0;
+  let totalPrice = 0;
+
+  const remainingUsage = MAX_MONTHY_USAGE - totalUsage;
 
   if (user) {
-    const usageData = await getTodayUsage({ user_id: user.id });
-    totalUsage = usageData.totalUsage;
-    totalPriceToday = usageData.totalPriceToday;
-  }
 
-  const remainingUsage = MAX_DAILY_USAGE - totalUsage;
+    const { usage, price } = await calculateUsage({user_id:  user.id });
+    totalUsage = usage;
+    totalPrice = price;
+    console.log("------------Total usage:", totalUsage);
+    const usage_id = await addOrUpdateMonthlyUsage({ user_id: user.id, usage: totalUsage, price: totalPrice });
+    console.log("------------Usage ID:", usage_id);
+  }
 
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll ">
@@ -40,19 +44,19 @@ const MySmartMeterPage = async () => {
           />
           <div className="flex justify-center items-center">
             <p className="text-[50px] lg:text-[64px] font-normal text-indigo-700">
-              ฿{totalPriceToday.toFixed(2)}
+              ฿{totalPrice.toFixed(2)}
             </p>
           </div>
         </div>
         <div className="flex justify-center items-center">
           <p
             className={cn("text-[20px] lg:text-[28px] font-norml", {
-              "text-red-500": totalUsage >= MAX_DAILY_USAGE,
-              "text-green-500": totalUsage < MAX_DAILY_USAGE,
+              "text-red-500": totalUsage >= MAX_MONTHY_USAGE,
+              "text-green-500": totalUsage < MAX_MONTHY_USAGE,
               "text-gray-600": totalUsage === 0.00,
             })}
           >
-            Used so far today: {totalUsage.toFixed(2)} kWh
+            Used so far this month: {totalUsage.toFixed(2)} kWh
           </p>
         </div>
         <div className="flex justify-center items-center">

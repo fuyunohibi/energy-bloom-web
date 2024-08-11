@@ -32,7 +32,3 @@ declare interface DeleteDeviceParams {
 declare interface GetDevicesParams {
   user_id: string;
 }
-
-declare interface GetTodayUsageParams {
-  user_id: string;
-}

@@ -1,10 +1,10 @@
-import { MAX_DAILY_USAGE } from "@/src/constants";
+import { MAX_MONTHY_USAGE } from "@/src/constants";
 
 const ColorIndicator = ({ totalUsage }) => {
   let colorClass = "text-gray-600";
   let displayText = "No Usage";
 
-  if (totalUsage >= MAX_DAILY_USAGE) {
+  if (totalUsage >= MAX_MONTHY_USAGE) {
     colorClass = "text-red-500";
     displayText = "Exceeded Maximum Usage";
   } else if (totalUsage > 0) {

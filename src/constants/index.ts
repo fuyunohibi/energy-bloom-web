@@ -17,4 +17,4 @@ export const sidebarLinks = [
 ];
 
 export const UNIT_PRICE = 4;
-export const MAX_DAILY_USAGE = 100;
+export const MAX_MONTHY_USAGE = 1000;
