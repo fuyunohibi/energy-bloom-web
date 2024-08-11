@@ -123,6 +123,7 @@ export const addOrUpdateMonthlyUsage = async ({
             .eq("user_id", user_id)
             .eq("month", currentMonth)
             .eq("year", currentYear)
+            .single();
 
         if (fetchError) {
             console.error("Error checking existing data:", fetchError.message);
@@ -134,8 +135,6 @@ export const addOrUpdateMonthlyUsage = async ({
         
 
         if (existingData) {
-            if (existingData.length > 0) {
-                const { id } = existingData[0];
             const { error: updateError } = await supabase
                 .from("usages")
                 .update({
