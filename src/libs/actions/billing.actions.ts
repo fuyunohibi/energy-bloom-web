@@ -78,12 +78,12 @@ export const getBillings = async ({ user_id }: GetBillingParams) => {
 
     console.log("BILLING DATA:", data);
 
-    const isFirstDayOfMonth = new Date().getDate() === 1;
+    const isLasttDayOfMonth = dayjs().endOf("month").isSame(dayjs(), "day");
     const hasCurrentMonthBilling = data.some(
       (billing) => billing.month === currentMonth && billing.year === currentYear
     );
     console.log("hasCurrentMonthBilling:", hasCurrentMonthBilling);
-    if (!hasCurrentMonthBilling || (!hasCurrentMonthBilling && isFirstDayOfMonth)) {
+    if ((!hasCurrentMonthBilling && isLasttDayOfMonth)) {
       console.log("No billing data for this month. Adding new billing...");
 
       await addBilling({

@@ -3,8 +3,22 @@
 import { UNIT_PRICE } from '@/src/constants';
 import { createClient } from '@/src/utils/supabase/server'; 
 import dayjs from 'dayjs';
-import bcrypt from 'bcrypt'; // Import bcrypt
+import crypto from 'crypto';
 import { revalidatePath } from 'next/cache';
+
+const PEPPER = process.env.PEPPER;
+
+const hashData = (data) => {
+    const hash = crypto.createHash('sha256');
+    hash.update(data + PEPPER);
+    return hash.digest('hex');
+};
+
+const verifyData = (data, storedHash) => {
+    const hash = hashData(data);
+    return hash === storedHash;
+  };
+
 
 export const getMonthlyUsage = async ({ user_id }: GetMonthlyUsageParams) => {
     try {
@@ -177,13 +191,12 @@ export const calculateUsage = async ({ user_id }: GetTodayUsageParams): Promise<
             usage,
             price,
         });
+        
+        const storedHash = hashData(usage);
 
-        const saltRounds = 10;
-        const usageString = usage.toString();
-        const hashedUsage = await bcrypt.hash(usageString, saltRounds);
+        console.log("Data Verification:", verifyData(usage, storedHash));
+        console.log("Hashed Usage Data:", storedHash);
 
-        console.log("Hashed Usage Data:", hashedUsage);
-        console.log("Usage Data Verification:", await bcrypt.compare(usageString, hashedUsage));
         // hash value doesnt match
         // console.log("Usage Data Verification:", await bcrypt.compare("wrong hash value", hashedUsage));
 
