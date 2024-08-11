@@ -15,3 +15,6 @@ export const sidebarLinks = [
     label: "Billing",
   },
 ];
+
+export const UNIT_PRICE = 4;
+export const MAX_DAILY_USAGE = 100;

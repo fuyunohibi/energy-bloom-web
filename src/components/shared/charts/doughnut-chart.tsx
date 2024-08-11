@@ -5,27 +5,28 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = () => {
+const DoughnutChart = ({ totalUsage, remainingUsage }) => {
   const data = {
     labels: ["Used", "Remaining"],
     datasets: [
       {
-        data: [54.63, 100 - 54.63], // Replace with your actual data
-        backgroundColor: ["#f0fcbc", "#CCCCCC"], // Green and grey colors
+        data: [totalUsage, remainingUsage],
+        backgroundColor: ["#f0fcbc", "#CCCCCC"],
         borderColor: ["#CCCCCC", "#CCCCCC"],
         borderWidth: 1,
+        borderRadius: 4, 
       },
     ],
   };
 
   const options = {
-    cutout: "80%", 
+    cutout: "80%",
     rotation: 270,
     circumference: 180,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, 
+        display: false,
       },
       tooltip: {
         enabled: false,

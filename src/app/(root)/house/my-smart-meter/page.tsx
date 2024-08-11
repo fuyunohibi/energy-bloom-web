@@ -1,9 +1,26 @@
+import ColorIndicator from "@/src/components/shared/box/color-indicator";
 import HeaderBox from "@/src/components/shared/box/header-box";
 import DoughnutChart from "@/src/components/shared/charts/doughnut-chart";
+import { MAX_DAILY_USAGE } from "@/src/constants";
+import { getTodayUsage } from "@/src/libs/actions/device.actions";
+import { getLoggedInUser } from "@/src/libs/actions/user.actions";
+import { cn } from "@/src/utils/cn";
 import dayjs from "dayjs";
 
 const MySmartMeterPage = async () => {
   const currentDateTime = dayjs().format("MMMM D, YYYY h:mm A");
+
+  const user = await getLoggedInUser();
+  let totalUsage = 0;
+  let totalPriceToday = 0;
+
+  if (user) {
+    const usageData = await getTodayUsage({ user_id: user.id });
+    totalUsage = usageData.totalUsage;
+    totalPriceToday = usageData.totalPriceToday;
+  }
+
+  const remainingUsage = MAX_DAILY_USAGE - totalUsage;
 
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll ">
@@ -17,17 +34,29 @@ const MySmartMeterPage = async () => {
           <HeaderBox title={`${currentDateTime}`} />
         </header>
         <div className="relative flex flex-row justify-center items-end h-72">
-          <DoughnutChart />
+          <DoughnutChart
+            totalUsage={totalUsage}
+            remainingUsage={remainingUsage}
+          />
           <div className="flex justify-center items-center">
-            <p className="text-[20px] lg:text-[64px] font-normal text-gray-600">
-              $60
+            <p className="text-[50px] lg:text-[64px] font-normal text-indigo-700">
+              ฿{totalPriceToday.toFixed(2)}
             </p>
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <p className="text-[20px] lg:text-[32px] font-normal text-gray-600">
-            Used so far today: 53.34 kWh
+          <p
+            className={cn("text-[20px] lg:text-[28px] font-norml", {
+              "text-red-500": totalUsage >= MAX_DAILY_USAGE,
+              "text-green-500": totalUsage < MAX_DAILY_USAGE,
+              "text-gray-600": totalUsage === 0.00,
+            })}
+          >
+            Used so far today: {totalUsage.toFixed(2)} kWh
           </p>
+        </div>
+        <div className="flex justify-center items-center">
+          <ColorIndicator totalUsage={totalUsage} />
         </div>
       </div>
     </section>

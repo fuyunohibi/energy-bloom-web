@@ -6,6 +6,7 @@ declare type Device = {
   created_at: string;
   device_count: number;
   device_unit_usage: number;
+  created_at: string;
 };
 
 declare interface AddDeviceParams {
@@ -29,5 +30,9 @@ declare interface DeleteDeviceParams {
 }
 
 declare interface GetDevicesParams {
+  user_id: string;
+}
+
+declare interface GetTodayUsageParams {
   user_id: string;
 }

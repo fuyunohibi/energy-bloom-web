@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/src/utils/supabase/server";
+import dayjs from "dayjs";
 import { revalidatePath } from "next/cache";
 
 export const addBilling = async ({
@@ -14,6 +15,8 @@ export const addBilling = async ({
   try {
     const supabase = createClient();
 
+    const createdAt = dayjs().toISOString();
+
     console.log("Adding billing this is from actions:", {
       user_id,
       month,
@@ -21,6 +24,7 @@ export const addBilling = async ({
       price,
       tax,
       total,
+      created_at: createdAt,
     });
 
     const { data, error } = await supabase.from("billings").insert([
@@ -31,6 +35,7 @@ export const addBilling = async ({
         price,
         tax,
         total,
+        created_at: createdAt, 
       },
     ]);
 
