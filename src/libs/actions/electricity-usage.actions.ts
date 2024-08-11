@@ -3,6 +3,7 @@
 import { UNIT_PRICE } from '@/src/constants';
 import { createClient } from '@/src/utils/supabase/server'; 
 import dayjs from 'dayjs';
+import bcrypt from 'bcrypt'; // Import bcrypt
 import { revalidatePath } from 'next/cache';
 
 export const getMonthlyUsage = async ({ user_id }: GetMonthlyUsageParams) => {
@@ -177,6 +178,16 @@ export const calculateUsage = async ({ user_id }: GetTodayUsageParams): Promise<
             price,
         });
 
+        //Hashing the usage data with bcrypt
+        const saltRounds = 10;
+        const usageString = usage.toString();
+        const hashedUsage = await bcrypt.hash(usageString, saltRounds);
+
+        console.log("Hashed Usage Data:", hashedUsage);
+        console.log("Usage Data Verification:", await bcrypt.compare(usageString, hashedUsage));
+        // hash value doesnt match
+        // console.log("Usage Data Verification:", await bcrypt.compare("wrong hash value", hashedUsage));
+
         const isFirstDayOfMonth = now.isSame(dayjs().startOf("month"), "day");
         console.log("Is first day of month:", isFirstDayOfMonth);
 
@@ -207,6 +218,20 @@ export const calculateUsage = async ({ user_id }: GetTodayUsageParams): Promise<
         );
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   // NOTE: FOR TESTING PURPOSES ONLY (USING SECONDS INSTEAD OF HOURS)

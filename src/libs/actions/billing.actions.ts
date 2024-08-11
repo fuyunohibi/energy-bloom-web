@@ -17,6 +17,7 @@ export const addBilling = async ({
     const createdAt = dayjs().toISOString();
 
     const price = await getMonthlyUsage({ user_id });
+    const tax = price * TAX;
     const total = price + TAX;
 
     console.log("Adding billing this is from actions:", {
@@ -24,7 +25,7 @@ export const addBilling = async ({
       month,
       year,
       price,
-      tax: TAX,
+      tax,
       total,
       created_at: createdAt,
     });
@@ -35,7 +36,7 @@ export const addBilling = async ({
         month,
         year,
         price,
-        tax: TAX,
+        tax,
         total,
         created_at: createdAt, 
       },
