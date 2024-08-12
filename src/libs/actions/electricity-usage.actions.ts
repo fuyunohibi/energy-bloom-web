@@ -1,24 +1,10 @@
 "use server";
 
 import { UNIT_PRICE } from '@/src/constants';
+import { hashData, verifyData } from '@/src/utils/crypto';
 import { createClient } from '@/src/utils/supabase/server'; 
 import dayjs from 'dayjs';
-import crypto from 'crypto';
 import { revalidatePath } from 'next/cache';
-
-const PEPPER = process.env.PEPPER;
-
-const hashData = (data) => {
-    const hash = crypto.createHash('sha256');
-    hash.update(data + PEPPER);
-    return hash.digest('hex');
-};
-
-const verifyData = (data, storedHash) => {
-    const hash = hashData(data);
-    return hash === storedHash;
-  };
-
 
 export const getMonthlyUsage = async ({ user_id }: GetMonthlyUsageParams) => {
     try {
@@ -245,21 +231,6 @@ export const calculateUsage = async ({ user_id }: GetTodayUsageParams): Promise<
         );
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   // NOTE: FOR TESTING PURPOSES ONLY (USING SECONDS INSTEAD OF HOURS)
 //   export const getTodayUsage = async ({ user_id }: GetTodayUsageParams) => {
