@@ -57,7 +57,7 @@ const AddDeviceDialog = ({ userId }: AddDeviceDialogProps) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <button className="flex flex-row gap-2 justify-between items-center rounded-lg px-3 py-2 bg-accent hover:bg-slate-900/90 transition-all duration-100">
+        <button className="flex flex-row gap-2 justify-between items-center rounded-[1rem] px-3 py-2 bg-accent hover:bg-slate-900/90 transition-all duration-100">
           <Image
             src="/assets/icons/shared/plus-icon.svg"
             width={20}
