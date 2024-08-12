@@ -16,6 +16,10 @@ export const sidebarLinks = [
   },
 ];
 
+// NOTE: BILLING
 export const UNIT_PRICE = 2.9;
 export const TAX = 0.07;
 export const MAX_MONTHY_USAGE = 1000;
+
+// NOTE: CRYPTOGRAPHY PROCESS FOR HASHING WITH BCRYPT PEPPER
+export const SALT_ROUNDS = 10;
