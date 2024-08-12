@@ -27,7 +27,7 @@ const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
             <FormControl>
               <Input
                 placeholder={placeholder}
-                className="text-[16px] placeholder:text-[16px] rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500"
+                className="text-[16px] placeholder:text-[16px] rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500 bg-gray-25 focus:outline-none focus:ring-2 focus:ring-tertiary focus:border-transparent py-3 px-4 w-full"
                 type={name === "password" ? "password" : "text"}
                 {...field}
               />

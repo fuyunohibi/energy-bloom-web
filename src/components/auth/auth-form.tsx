@@ -90,7 +90,7 @@ const AuthForm = ({ type }: { type: string }) => {
             height={90}
             alt="Energy Bloom logo"
           />
-          <h1 className="text-[26px] font-bold text-black-1">Energy Bloom</h1>
+          <h1 className="text-[26px] font-bold text-primary">Energy Bloom</h1>
         </Link>
 
         <div className="flex flex-col gap-1 md:gap-3">
@@ -163,7 +163,6 @@ const AuthForm = ({ type }: { type: string }) => {
                 label="Email"
                 placeholder="Enter your email"
               />
-
               <CustomInput
                 control={form.control}
                 name="password"
@@ -175,7 +174,7 @@ const AuthForm = ({ type }: { type: string }) => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="text-[16px] rounded-lg border border-primary bg-primary font-semibold text-white shadow-form"
+                  className="text-[16px] rounded-[3rem] py-7 bg-primary font-semibold text-white shadow-form"
                 >
                   {isLoading ? (
                     <>
@@ -200,7 +199,7 @@ const AuthForm = ({ type }: { type: string }) => {
             </p>
             <Link
               href={type === "sign-in" ? "/sign-up" : "/sign-in"}
-              className="form-link"
+              className="text-[15px] cursor-pointer font-medium text-accent"
             >
               {type === "sign-in" ? "Sign up" : "Sign in"}
             </Link>

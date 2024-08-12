@@ -142,7 +142,7 @@ export const updateElectricityUsage = async ({
   }, "updating electricity usage");
 };
 
-export const calculateUsage = async ({
+export const calculateUsageAndPrice = async ({
   user_id,
 }: GetTodayUsageParams): Promise<{ usage: number; price: number }> => {
   return handleSupabaseRequest(async () => {

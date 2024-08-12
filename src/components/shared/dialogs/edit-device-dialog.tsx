@@ -58,7 +58,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <button className="flex flex-row gap-2 justify-between items-center rounded-lg px-3 py-2 bg-tertiary hover:bg-secondary transition-all duration-100">
+        <button className="flex flex-row gap-2 justify-between items-center rounded-lg px-3 py-2 bg-tertiary transition-all duration-100">
           <Image
             src="/assets/icons/shared/edit-icon.svg"
             width={20}
@@ -66,7 +66,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
             alt="edit icon"
             className="size-4"
           />
-          <h2 className="text-[14px] font-semibold text-gray-600 mt-[0.15rem]">
+          <h2 className="text-[14px] font-semibold text-white mt-[0.15rem]">
             Edit Device
           </h2>
         </button>
@@ -120,7 +120,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-primary text-black-1 px-4 py-2 rounded-lg"
+              className="bg-accent text-white px-4 py-2 rounded-lg hover:bg-slate-900/90 transition-all duration-100"
             >
               {loading ? "Saving..." : "Save"}
             </button>

@@ -46,10 +46,10 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
                 : "flex flex-1 flex-col justify-center max-xl:hidden"
             }
           >
-            <h1 className="text-[14px] truncate text-gray-700 font-semibold">
+            <h1 className="text-[14px] truncate text-accent font-semibold">
               {user?.first_name}
             </h1>
-            <p className="text-[14px] truncate font-normal text-gray-600">
+            <p className="text-[14px] truncate font-normal text-primary">
               {user?.email}
             </p>
           </div>
@@ -60,8 +60,10 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
           >
             <Image
               src="/assets/icons/footer/logout.svg"
-              fill
               alt="logout icon"
+              width={50}
+              height={50}
+              className="size-5 transition-all block hover:hidden"
             />
           </div>
         </>
@@ -69,7 +71,7 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
         <>
           <Button
             type="button"
-            className="bg-primary"
+            className="bg-dark-background w-full rounded-[1rem]"
             onClick={() => router.push("/sign-in")}
           >
             Add Account

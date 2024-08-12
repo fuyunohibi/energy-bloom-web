@@ -13,18 +13,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <main className="flex min-h-screen w-full justify-between">
+        <main className="flex min-h-screen w-full justify-between bg-background">
           {children}
-          <div className="flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-lg:hidden">
-            {/* <div>
-              <Image
-                src="/assets/images/auth/auth-image.svg"
-                alt="Auth image"
-                width={500}
-                height={500}
-                className="rounded-l-xl object-contain"
-              />
-            </div> */}
+          <div className="flex h-screen w-full sticky top-0 items-center justify-end bg-background max-lg:hidden">
+            <Image
+              src="/assets/images/auth/background-image.jpeg"
+              alt="Auth image"
+              width={1500}
+              height={500}
+              className="object-cover"
+            />
           </div>
         </main>
       </body>

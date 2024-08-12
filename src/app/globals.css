@@ -90,4 +90,9 @@
     --radius: 0.5rem;
   }
 }
+
+.glassmorphism {
+   background: radial-gradient(189.47% 125.36% at 2.01% 39.74%, rgba(85, 99, 88, 0.20) 0%, rgba(110, 191, 244, 0.04) 77.08%, rgba(70, 144, 212, 0.00) 100%);
+   backdrop-filter: blur(40px);
+}
  

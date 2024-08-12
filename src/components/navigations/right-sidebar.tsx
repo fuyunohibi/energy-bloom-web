@@ -9,13 +9,21 @@ interface RightSidebarProps {
 
 const RightSidebar = ({ user, devices }: RightSidebarProps) => {
   return (
-    <aside className="no-scrollbar hidden max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll bg-white rounded-[3.25rem] m-4 shadow-lg">
+    <aside className="no-scrollbar hidden max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll glassmorphism rounded-[3.25rem] m-4 shadow-lg">
       <section className="flex flex-col pb-8">
         {/* BACKGROUND IMAGE */}
-        <div className="h-[160px] w-full bg-primary bg-cover bg-no-repeat" />
+        <div className="h-[160px] w-full bg-accent bg-cover bg-no-repeat">
+          <Image
+            src="/assets/images/auth/background-image.jpeg"
+            alt="Auth image"
+            width={300}
+            height={300}
+            className="object-cover w-full h-[160px]"
+          />
+        </div>
         {/* PROFILE */}
         <div className="relative flex px-6 max-xl:justify-center">
-          <div className="flex-center absolute -top-12 size-24 rounded-full bg-gray-100 border-white p-1.5 shadow-profile">
+          <div className="flex-center absolute -top-12 size-24 rounded-full bg-white p-1.5 shadow-profile">
             <Image
               src={user?.avatar_url}
               className="rounded-full"
@@ -43,10 +51,7 @@ const RightSidebar = ({ user, devices }: RightSidebarProps) => {
           </h2>
           <AddDeviceDialog userId={user.id} />
         </div>
-        <HoverEffectEdit
-          items={devices}
-          useGrid={false}
-        />
+        <HoverEffectEdit items={devices} useGrid={false} />
       </section>
     </aside>
   );
