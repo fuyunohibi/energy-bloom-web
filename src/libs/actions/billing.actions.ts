@@ -90,6 +90,7 @@ export const getBillings = async ({ user_id }: GetBillingParams) => {
           billing.month === currentMonth && billing.year === currentYear
       );
       console.log("hasCurrentMonthBilling:", hasCurrentMonthBilling);
+      
       if (!hasCurrentMonthBilling && isLastDayOfMonth) {
         console.log("No billing data for this month. Adding new billing...");
 
@@ -101,6 +102,19 @@ export const getBillings = async ({ user_id }: GetBillingParams) => {
       } else {
         console.log("Billing data already exists for this month.");
       }
+
+      // NOTE: For testing:::
+      // if (true) {
+      //   console.log("No billing data for this month. Adding new billing...");
+
+      //   await addBilling({
+      //     user_id,
+      //     month: currentMonth,
+      //     year: currentYear,
+      //   });
+      // } else {
+      //   console.log("Billing data already exists for this month.");
+      // }
 
       return data;
     } catch (error) {

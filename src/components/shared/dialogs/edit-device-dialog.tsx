@@ -71,7 +71,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
           </h2>
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="rounded-[3rem]">
         <DialogHeader>
           <DialogTitle>Edit Device</DialogTitle>
           <DialogDescription>
@@ -84,7 +84,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
             placeholder="Device Name"
             value={deviceName}
             onChange={(e) => setDeviceName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <input
@@ -92,7 +92,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
             placeholder="Device Type"
             value={deviceType}
             onChange={(e) => setDeviceType(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <input
@@ -100,7 +100,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
             placeholder="Device Count"
             value={deviceCount}
             onChange={(e) => setDeviceCount(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <input
@@ -108,7 +108,7 @@ const EditDeviceDialog = ({ device }: EditDeviceDialogProps) => {
             placeholder="Device Unit Usage"
             value={deviceUnitUsage}
             onChange={(e) => setDeviceUnitUsage(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <DialogFooter>

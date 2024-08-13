@@ -18,6 +18,8 @@ const Footer = ({ user, type = "desktop" }: FooterProps) => {
     if (loggedOut) router.push("/sign-in");
   };
 
+  console.log("USER IN FOOTER", user);
+
   return (
     <footer className="flex cursor-pointer items-center justify-between gap-2 py-6">
       {user ? (

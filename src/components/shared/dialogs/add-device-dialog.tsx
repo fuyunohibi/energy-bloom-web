@@ -67,7 +67,7 @@ const AddDeviceDialog = ({ userId }: AddDeviceDialogProps) => {
           <h2 className="text-[14px] font-semibold text-white">Add Device</h2>
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="rounded-[3rem]">
         <DialogHeader>
           <DialogTitle>Add Device</DialogTitle>
           <DialogDescription>
@@ -80,7 +80,7 @@ const AddDeviceDialog = ({ userId }: AddDeviceDialogProps) => {
             placeholder="Device Name"
             value={deviceName}
             onChange={(e) => setDeviceName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <input
@@ -88,7 +88,7 @@ const AddDeviceDialog = ({ userId }: AddDeviceDialogProps) => {
             placeholder="Device Type"
             value={deviceType}
             onChange={(e) => setDeviceType(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <input
@@ -96,7 +96,7 @@ const AddDeviceDialog = ({ userId }: AddDeviceDialogProps) => {
             placeholder="Device Count"
             value={deviceCount}
             onChange={(e) => setDeviceCount(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <input
@@ -104,7 +104,7 @@ const AddDeviceDialog = ({ userId }: AddDeviceDialogProps) => {
             placeholder="Device Unit Usage"
             value={deviceUnitUsage}
             onChange={(e) => setDeviceUnitUsage(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-tertiary focus:border-transparent"
             required
           />
           <DialogFooter>

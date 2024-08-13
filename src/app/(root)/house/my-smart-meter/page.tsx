@@ -66,7 +66,7 @@ const MySmartMeterPage = async () => {
               className={cn("text-[18px] lg:text-[22px] font-norml", {
                 "text-red-500": totalUsage >= MAX_MONTHY_USAGE,
                 "text-green-500": totalUsage < MAX_MONTHY_USAGE,
-                "text-gray-600": totalUsage === 0.0,
+                "text-white": totalUsage === 0.0,
               })}
             >
               Used so far this month: {formattedKWh} kWh

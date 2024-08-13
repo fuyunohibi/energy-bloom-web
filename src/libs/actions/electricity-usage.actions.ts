@@ -130,7 +130,7 @@ export const updateElectricityUsage = async ({
         throw new Error(error.message);
       }
 
-      revalidatePath("/");
+      revalidatePath("/house/my-smart-meter");
 
       return data;
     } catch (error) {
@@ -216,6 +216,17 @@ export const calculateUsageAndPrice = async ({
       } else {
         await updateElectricityUsage({ user_id, usage, price });
       }
+
+      // NOTE: FOR LIVE DEMO
+       if (
+         !hasCurrentMonthUsage ||
+         (!hasCurrentMonthUsage && isFirstDayOfMonth)
+       ) {
+         await addElectricityUsage({ user_id, usage, price });
+       } else {
+         await updateElectricityUsage({ user_id, usage, price });
+       }
+
 
       return { usage, price };
     } catch (error) {

@@ -1,7 +1,7 @@
 import { MAX_MONTHY_USAGE } from "@/src/constants";
 
 const ColorIndicator = ({ totalUsage }) => {
-  let colorClass = "text-gray-600";
+  let colorClass = "text-white";
   let displayText = "No Usage";
 
   if (totalUsage >= MAX_MONTHY_USAGE) {
