@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tv-container-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tv-container
+  template:
+    metadata:
+      labels:
+        app: tv-container
+    spec:
+      containers:
+        - name: tv-container-parent
+          image: busybox
+          command: ["/bin/sh", "-c", "echo 'John Doe' > /data/input.txt; sleep 3600"]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - sleep 60 && exit 1  # Fail after 60 seconds
+            initialDelaySeconds: 60  # Start liveness check after 60 seconds
+            periodSeconds: 10        # Check every 10 seconds
+
+            # in this case it will restart ever 2 min from sleep 60 + initialDelaySeconds: 60
+
+        - name: tv-container-child1
+          image: busybox
+          command: ["/bin/sh", "-c", "cat /data/input.txt; sleep 3600"]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
+
+        - name: tv-container-child2
+          image: busybox
+          command: ["/bin/sh", "-c", "cat /data/input.txt; sleep 3600"]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
+
+        - name: tv-container-child3
+          image: busybox
+          command: ["/bin/sh", "-c", "cat /data/input.txt; sleep 3600"]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
+
+      volumes:
+        - name: shared-data
+          emptyDir: {}
